@@ -1,0 +1,11 @@
+INSERT INTO COMMANDS (id, total_price) VALUES (1, 54.80);
+INSERT INTO COMMANDS (id, total_price) VALUES (2, 208.00);
+
+
+INSERT INTO COMMAND_LINES (id, product_name, product_price, quantity, command_id) VALUES (1, 'Gants de ski', 10, 4, 1);
+INSERT INTO COMMAND_LINES (id, product_name, product_price, quantity, command_id) VALUES (2, 'Bonnet en laine', 14.80, 1, 1);
+INSERT INTO COMMAND_LINES (id, product_name, product_price, quantity, command_id) VALUES (3, 'Vélo', 208.00, 1, 2);
+
+
+INSERT INTO TRANSACTIONS (id, amount, type, status) VALUES (1, 54.80, 'CREDIT_CARD', 'NEW', 1);
+INSERT INTO TRANSACTIONS (id, amount, type, status) VALUES (2, 208.00, 'PAYPAL', 'CAPTURED', 2);

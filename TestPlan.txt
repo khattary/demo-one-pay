@@ -1,0 +1,81 @@
+Test plan:
+=========
+1- Création d'une transaction d'un montant de 54,80 EUR avec CREDIT_CARD et une commande contenant 4 paires de gants de ski à 10 EUR pièce, et 1 bonnet en laine à 14,80EUR
+
+Request:
+=======
+curl -X 'POST' \
+  'http://localhost:8080/one-pay/transactions/' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "type": "CREDIT_CARD",
+  "command": {
+    "commandLines": [
+      {
+        "productName": "Gants de ski",
+        "productPrice": 10.0,
+        "quantity": 4
+      },
+      {
+        "productName": "Bonnet en laine",
+        "productPrice": 14.80,
+        "quantity": 1
+      }
+    ]
+  }
+}'
+
+2- Modification de la transaction n° 1 en passant le statut à AUTHORIZED
+
+Request:
+=======
+curl -X 'PUT' \
+  'http://localhost:8080/one-pay/transactions/1' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "type": "CREDIT_CARD",
+  "status": "AUTHORIZED"
+}'
+
+3- Modification de la transaction n° 1 en passant le statut à CAPTURED
+
+Request:
+=======
+curl -X 'PUT' \
+  'http://localhost:8080/one-pay/transactions/1' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "type": "CREDIT_CARD",
+  "status": "CAPTURED"
+}'
+
+4- Création d'une transaction d'un montant de 208 EUR avec PAYPAL et une commande contenant 1 vélo à 208 EUR
+Request:
+=======  
+curl -X 'POST' \
+  'http://localhost:8080/one-pay/transactions/' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "type": "PAYPAL",
+  "command": {
+    "commandLines": [
+      {
+        "productName": "vélo",
+        "productPrice": 208,
+        "quantity": 1
+      }
+    ]
+  }
+}'
+
+5- Récupérer toutes les transactions
+Request:
+======= 
+
+curl -X 'GET' \
+  'http://localhost:8080/one-pay/transactions/' \
+  -H 'accept: */*'
